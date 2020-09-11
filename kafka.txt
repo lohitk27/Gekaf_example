@@ -1,0 +1,72 @@
+https://www.sohamkamani.com/blog/2017/11/22/how-to-install-and-run-kafka/
+
+install kafka tar 
+untar kafka 
+mount to cd /opt folder
+cd /opt/kafka
+cd /opt/kafka/bin --- set path in .bashrc file and run source .bashrc
+
+restart terminal
+
+http://geojson.io/#map=8/39.973/-77.789
+
+to view zookeeper properties
+vi zookeeper.properties
+
+to check zookeeper running 
+telnet localhost 2181
+
+echo stat | nc <zookeeper ip> 2181
+echo mntr | nc <zookeeper ip> 2181
+echo isro  | nc <zookeeper ip> 2181
+
+
+-----for logs
+cd /opt/kafka_2.12-2.4.0/logs/
+view server.log --> we can check health status 
+
+------for confg 
+cd /opt/kafka_2.12-2.4.0/config/
+view server.properties
+in these we can modify ipaddress and ports
+
+
+First We need to start KAFKA
+
+###########To start zookeeper comnd 
+cd /opt/kafka : bin/zookeeper-server-start.sh config/zookeeper.properties
+
+###### Second Starting Kafka Server
+Duplicate terminal
+cd /opt/kafka :bin/kafka-server-start.sh config/server.properties
+
+###### Third Create Topics
+Duplicate terminal
+cd /opt/kafka: bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic data
+
+####### To know how many list of topics are running 
+Duplicate terminal
+cd /opt/kafka: bin/kafka-topics.sh --list --zookeeper localhost:2181
+
+####### Fourth Send Messages (Producer)
+Duplicate terminal
+cd /opt/kafka:bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test
+>
+>
+>
+>
+>
+
+####### Fifth Consuming Messages (Consumer)
+Duplicate terminal
+cd /opt/kafka:bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic sampleData --from-beginning
+
+View Purposes 
+
+### To create kafka Topic 
+kafka_2.12-2.4.0 bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+
+
+
+
+ 
